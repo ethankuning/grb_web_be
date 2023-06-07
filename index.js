@@ -30,6 +30,18 @@ app.get("/books/:sid", async(req, res) => {
     }
 });
 
+app.post("/query", async(req, res) => {
+    console.log(req.body);
+    try {
+        const {sqlquery} = req.body;
+        const getBooks = await pool.query(sqlquery);
+
+        res.json(getBooks.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 app.post("/books", async(req, res) => {
     try {
         const {book_number, author_number, publisher_number, store_number, book_name, publication_year, pages, price, quantity} = req.body;
