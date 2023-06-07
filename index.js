@@ -39,6 +39,7 @@ app.post("/query", async(req, res) => {
         res.json(getBooks.rows);
     } catch (err) {
         console.error(err.message);
+        res.json(err.message);
     }
 });
 
